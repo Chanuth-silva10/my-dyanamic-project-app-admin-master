@@ -3,29 +3,19 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "project-blog-admin": {
+    "app-blog-dashboard": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "standalone": false
-        },
-        "@schematics/angular:directive": {
-          "standalone": false
-        },
-        "@schematics/angular:pipe": {
-          "standalone": false
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/project-blog-admin",
+            "outputPath": "dist/app-blog-dashboard",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -57,13 +47,16 @@
               "outputHashing": "all"
             },
             "development": {
+              "buildOptimizer": false,
               "optimization": false,
+              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
+              "namedChunks": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.development.ts"
                 }
               ]
             }
@@ -74,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "project-blog-admin:build:production"
+              "browserTarget": "app-blog-dashboard:build:production"
             },
             "development": {
-              "buildTarget": "project-blog-admin:build:development"
+              "browserTarget": "app-blog-dashboard:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "project-blog-admin:build"
+            "browserTarget": "app-blog-dashboard:build"
           }
         },
         "test": {
@@ -110,6 +103,6 @@
     }
   },
   "cli": {
-    "analytics": "bbf9589a-ab4b-48b2-9a22-7eebd26538c7"
+    "analytics": "7974ef85-9231-4ee0-8a6a-f5c38e3a6ca7"
   }
 }
