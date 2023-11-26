@@ -4,7 +4,11 @@
       <h3 class="text-center text-theme-primary">New Categories</h3>
       <p class="text-center mb-5">You can add new categories ...!</p>
 
-      <form class="form-inline text-center" #categoryForm="ngForm">
+      <form
+        class="form-inline text-center"
+        #categoryForm ='ngForm'
+        (ngSubmit)="onSubmit(categoryForm)"
+      >
         <div class="form-group col-md-10">
           <input
             type="text"
