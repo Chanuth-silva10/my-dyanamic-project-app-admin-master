@@ -38,6 +38,10 @@ body{
     background-color: var(--secondary-color);
 }
 
+.bg-primary-theme {
+    background-color: var(--primary-color);
+}
+
 .text-theme-primary {
     color: var(--primary-color);
 }
