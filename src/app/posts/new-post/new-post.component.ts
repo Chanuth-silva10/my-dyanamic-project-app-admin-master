@@ -36,6 +36,10 @@ export class NewPostComponent implements OnInit {
     });
   }
 
+  get fc(): any {
+    return this.postForm.controls;
+  }
+
   onTitleChanged($event: any) {
     const title = $event.target.value;
     this.permalink = title.replace(/\s/g, '-');
@@ -49,5 +53,9 @@ export class NewPostComponent implements OnInit {
 
     reader.readAsDataURL($event.target.files[0]);
     this.selectedImg = $event.target.files[0];
+  }
+
+  onSubmit(){
+    console.log(this.postForm.value);
   }
 }
