@@ -12,10 +12,13 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(formData: { value: { category: string } }) {
-    
     let categoryData = {
       category: formData.value.category,
-      status: 'active'
+      status: 'active',
+    };
+
+    let subCategoryData = {
+      subCategory: 'subCategory1',
     };
 
     this.afs
@@ -23,6 +26,33 @@ export class CategoriesComponent implements OnInit {
       .add(categoryData)
       .then((docRef) => {
         console.log(docRef);
+
+        this.afs
+          .doc(`categories/${docRef.id}`)
+          .collection('subcategories')
+          .add(subCategoryData)
+          .then((docRef1) => {
+            console.log(docRef1);
+
+            this.afs
+              .doc(`categories/${docRef.id}/subcategories/${docRef1.id}`)
+              .collection('subsubcategories')
+              .add(subCategoryData)
+              .then((docRef2) => {
+                console.log('Second Level Subcategory Saved Successfully');
+              });
+
+            // this.afs
+            //   .collection('categories')
+            //   .doc(docRef.id)
+            //   .collection('subcategories')
+            //   .doc(docRef1.id)
+            //   .collection('subsubcategories')
+            //   .add(subCategoryData)
+            //   .then((docRef2) => {
+            //     console.log('Second Level Subcategory Saved Successfully');
+            //   });
+          });
       })
       .catch((err) => {
         console.log(err);
