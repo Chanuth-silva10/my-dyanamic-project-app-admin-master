@@ -10,5 +10,9 @@ export class PostsService {
   uploadImage(selectedImage: any) {
     const filePath = `postIMG/${Date.now()}`;
     console.log(filePath);
+
+    this.storage.upload(filePath, selectedImage).then(()=>{
+      console.log('Post image uploaded successfully.')
+    })
   }
 }
