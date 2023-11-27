@@ -35,4 +35,24 @@ export class CategoriesService {
         })
       );
   }
+
+  updataData(id:string, EditData:object) {
+    this.afs
+      .collection('categories')
+      .doc(id)
+      .update(EditData)
+      .then((docRef) => {
+        this.toastr.success('Data Updated Successfully ..!');
+      });
+  }
+
+  deleteData(id:string) {
+    this.afs
+      .collection('categories')
+      .doc(id)
+      .delete()
+      .then((docRef) => {
+        this.toastr.success('Data Deleted Successfully ..!');
+      });
+  }
 }
