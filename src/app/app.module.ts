@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,6 +43,7 @@ import { NewPostComponent } from './posts/new-post/new-post.component';
     BrowserAnimationsModule,
     AngularEditorModule,
     HttpClientModule,
+    AngularFireStorageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
