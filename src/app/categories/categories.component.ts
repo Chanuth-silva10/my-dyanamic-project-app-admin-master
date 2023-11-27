@@ -1,25 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
+  constructor(private afs: AngularFirestore) {}
 
-  constructor(){}
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  onSubmit(formData: { value: { category: string } }) {
     
-  }
-
-  onSubmit(formData: { value: { category: string; }; }){
-
     let categoryData = {
-      category: formData.value.category
-    }
+      category: formData.value.category,
+      status: 'active'
+    };
 
-    console.log(categoryData);
+    this.afs
+      .collection('categories')
+      .add(categoryData)
+      .then((docRef) => {
+        console.log(docRef);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
-
 }
