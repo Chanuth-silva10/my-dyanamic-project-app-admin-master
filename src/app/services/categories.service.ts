@@ -38,8 +38,7 @@ export class CategoriesService {
 
   updataData(id:string, EditData:object) {
     this.afs
-      .collection('categories')
-      .doc(id)
+      .doc(`categories/${id}`)
       .update(EditData)
       .then((docRef) => {
         this.toastr.success('Data Updated Successfully ..!');
@@ -48,8 +47,7 @@ export class CategoriesService {
 
   deleteData(id:string) {
     this.afs
-      .collection('categories')
-      .doc(id)
+      .doc(`categories/${id}`)
       .delete()
       .then((docRef) => {
         this.toastr.success('Data Deleted Successfully ..!');
