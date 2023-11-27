@@ -10,7 +10,11 @@ import { Category } from '../models/category';
 export class CategoriesComponent implements OnInit {
   constructor( private categoryService: CategoriesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.categoryService.loadData().subscribe(val => {
+      console.log(val);
+    });
+  }
 
   onSubmit(formData: { value: { category: string } }) {
 
