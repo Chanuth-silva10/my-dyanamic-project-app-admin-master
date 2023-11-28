@@ -27,7 +27,6 @@
                 <th>No</th>
                 <th>Post Image</th>
                 <th>Title</th>
-                <th>Excerpt</th>
                 <th>Category</th>
                 <th>Date</th>
                 <th>Actions</th>
@@ -37,21 +36,18 @@
             <tbody>
               <tr *ngFor="let post of postArray; let i = index">
                 <td style="max-width: 10px; height: auto">{{ i + 1 }}</td>
-                <td style="max-width: 200px; height: 100px">
+                <td style="max-width: 120px; height: 100px">
                   <img
                     src="{{ post.data.postImgPath }}"
                     class="img img-fluid"
                   />
                 </td>
-                <td style="max-width: 180px; height: auto">
+                <td style="max-width: 150px; height: auto">
                   {{ post.data.title }}
-                </td>
-                <td style="max-width: 400px; height: auto">
-                  {{ post.data.excerpt }}
                 </td>
                 <td>{{ post.data.category.category }}</td>
                 <td>{{ post.data.createdAt.toMillis() | date }}</td>
-                <td style="max-width: 200px; height: auto">
+                <td>
                   <button
                     class="btn btn-sm btn-warning"
                     routerLink="/posts/new"
@@ -60,10 +56,24 @@
                     Edit
                   </button>
                   <button
-                    class="btn btn-sm btn-danger mt-2"
+                    class="btn btn-sm btn-danger ml-2"
                     (click)="onDelete(post.data.postImgPath, post.id)"
                   >
                     Delete
+                  </button>
+                  <button
+                    *ngIf="!post.data.isFeatured"
+                    class="btn btn-sm btn-success ml-2"
+                    (click)="onFeatured(post.id, true)"
+                  >
+                    Mark Featured
+                  </button>
+                  <button
+                    *ngIf="post.data.isFeatured"
+                    class="btn btn-sm btn-info ml-2"
+                    (click)="onFeatured(post.id, false)"
+                  >
+                    Remove Featured
                   </button>
                 </td>
               </tr>
