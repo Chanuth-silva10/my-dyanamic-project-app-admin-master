@@ -17,7 +17,7 @@ export class NewPostComponent implements OnInit {
 
   categories!: Array<any>;
 
-  postForm: FormGroup;
+  postForm!: FormGroup;
 
   post: any;
 
@@ -32,34 +32,43 @@ export class NewPostComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.route.queryParams.subscribe((val) => {
-
       this.docId = val['id'];
-      this.postService.loadOneData(val['id']).subscribe((post) => {
 
-        this.post = post;
+      if (this.docId) {
+        this.postService.loadOneData(val['id']).subscribe((post) => {
+          this.post = post;
 
-        this.postForm = this.fb.group({
-          title: [this.post.title, [Validators.required, Validators.minLength(10)]],
-          permalink: [this.post.permalink, Validators.required],
-          excerpt: [this.post.excerpt, [Validators.required, Validators.minLength(50)]],
-          category: [`${this.post.category.categoryId}-${this.post.category.category}`, Validators.required],
-          postImg: ['', Validators.required],
-          content: [this.post.content, Validators.required],
+          this.postForm = this.fb.group({
+            title: [
+              this.post.title,
+              [Validators.required, Validators.minLength(10)],
+            ],
+            permalink: [this.post.permalink, Validators.required],
+            excerpt: [
+              this.post.excerpt,
+              [Validators.required, Validators.minLength(50)],
+            ],
+            category: [
+              `${this.post.category.categoryId}-${this.post.category.category}`,
+              Validators.required,
+            ],
+            postImg: ['', Validators.required],
+            content: [this.post.content, Validators.required],
+          });
+
+          this.imgSrc = this.post.postImgPath;
+          this.formStatus = 'Edit';
         });
-
-        this.imgSrc = this.post.postImgPath;
-        this.formStatus = 'Edit';
-
-      });
-    });
-
-    this.postForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(10)]],
-      permalink: ['', Validators.required],
-      excerpt: ['', [Validators.required, Validators.minLength(50)]],
-      category: ['', Validators.required],
-      postImg: ['', Validators.required],
-      content: ['', Validators.required],
+      } else {
+        this.postForm = this.fb.group({
+          title: ['', [Validators.required, Validators.minLength(10)]],
+          permalink: ['', Validators.required],
+          excerpt: ['', [Validators.required, Validators.minLength(50)]],
+          category: ['', Validators.required],
+          postImg: ['', Validators.required],
+          content: ['', Validators.required],
+        });
+      }
     });
   }
 
@@ -107,7 +116,12 @@ export class NewPostComponent implements OnInit {
       createdAt: new Date(),
     };
 
-    this.postService.uploadImage(this.selectedImg, postData, this.formStatus, this.docId);
+    this.postService.uploadImage(
+      this.selectedImg,
+      postData,
+      this.formStatus,
+      this.docId
+    );
     this.postForm.reset();
     this.imgSrc = './assets/placeholder-image.png';
   }
