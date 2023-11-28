@@ -20,10 +20,6 @@ export class AuthService {
     this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((logRef) => {
-        this.toastr.success('Logged In Successfully');
-        this.loadUser();
-        this.loggedIn.next(true);
-        this.router.navigate(['/']);
       })
       .catch((e) => {
         this.toastr.warning(
@@ -32,19 +28,9 @@ export class AuthService {
       });
   }
 
-  loadUser() {
-    this.afAuth.authState.subscribe((user) => {
-      console.log(JSON.parse(JSON.stringify(user)));
-      localStorage.setItem('user', JSON.stringify(user));
-    });
-  }
 
   logOut() {
     this.afAuth.signOut().then(() => {
-      this.toastr.success('User Logged Out Successfully');
-      localStorage.removeItem('user');
-      this.loggedIn.next(false);
-      this.router.navigate(['/login']);
     });
   }
 
