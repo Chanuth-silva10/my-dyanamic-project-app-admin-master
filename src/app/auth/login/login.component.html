@@ -8,7 +8,7 @@
             <h3 class="text-theme-primary">Login</h3>
             <p>Please login to your admin account to post a new blog post</p>
           </div>
-          <form #loginForm="ngForm">
+          <form #loginForm= ngForm (ngSubmit)="onSubmit(loginForm.value)">
             <div class="form-group">
               <input
                 type="email"
@@ -53,7 +53,7 @@
             </div>
             <button
               class="btn btn-info btn-block btn-theme"
-              [disabled]="loginForm"
+              [disabled]= "loginForm.invalid"
             >
               Login
             </button>
