@@ -33,21 +33,33 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            
+
             <tbody>
               <tr *ngFor="let post of postArray; let i = index">
-                <td style="max-width: 10px; height: auto;">{{ i + 1 }}</td>
-                <td style="max-width: 200px; height: auto;">
+                <td style="max-width: 10px; height: auto">{{ i + 1 }}</td>
+                <td style="max-width: 200px; height: 100px">
                   <img
                     src="{{ post.data.postImgPath }}"
                     class="img img-fluid"
                   />
                 </td>
-                <td style="max-width: 200px; height: auto;">{{ post.data.title }}</td>
-                <td style="max-width: 300px; height: auto;">{{ post.data.excerpt }}</td>
+                <td style="max-width: 180px; height: auto">
+                  {{ post.data.title }}
+                </td>
+                <td style="max-width: 400px; height: auto">
+                  {{ post.data.excerpt }}
+                </td>
                 <td>{{ post.data.category.category }}</td>
-                <td style="max-width: 150px; height: auto;">{{ post.data.createdAt }}</td>
-                <td></td>
+                <td>{{ post.data.createdAt.toMillis() | date }}</td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-warning"
+                    routerLink="/posts/new"
+                    [queryParams]="{ id: post.id }"
+                  >
+                    Edit
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>

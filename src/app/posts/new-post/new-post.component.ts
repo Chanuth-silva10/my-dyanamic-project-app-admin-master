@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Post } from 'src/app/models/post';
 import { PostsService } from 'src/app/services/posts.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-new-post',
   templateUrl: './new-post.component.html',
@@ -18,11 +19,40 @@ export class NewPostComponent implements OnInit {
 
   postForm: FormGroup;
 
+  post: any;
+
+  formStatus: string = 'Add New';
+
+  docId!: string;
+
   constructor(
     private categoryService: CategoriesService,
     private fb: FormBuilder,
-    private postService:PostsService
+    private postService: PostsService,
+    private route: ActivatedRoute
   ) {
+    this.route.queryParams.subscribe((val) => {
+
+      this.docId = val['id'];
+      this.postService.loadOneData(val['id']).subscribe((post) => {
+
+        this.post = post;
+
+        this.postForm = this.fb.group({
+          title: [this.post.title, [Validators.required, Validators.minLength(10)]],
+          permalink: [this.post.permalink, Validators.required],
+          excerpt: [this.post.excerpt, [Validators.required, Validators.minLength(50)]],
+          category: [`${this.post.category.categoryId}-${this.post.category.category}`, Validators.required],
+          postImg: ['', Validators.required],
+          content: [this.post.content, Validators.required],
+        });
+
+        this.imgSrc = this.post.postImgPath;
+        this.formStatus = 'Edit';
+
+      });
+    });
+
     this.postForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(10)]],
       permalink: ['', Validators.required],
@@ -77,7 +107,7 @@ export class NewPostComponent implements OnInit {
       createdAt: new Date(),
     };
 
-    this.postService.uploadImage(this.selectedImg, postData);
+    this.postService.uploadImage(this.selectedImg, postData, this.formStatus, this.docId);
     this.postForm.reset();
     this.imgSrc = './assets/placeholder-image.png';
   }
