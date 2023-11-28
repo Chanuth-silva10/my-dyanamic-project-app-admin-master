@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row mt-5">
     <div class="col-md-12">
       <div class="card shadow-effect">
         <div class="card-body">
@@ -51,13 +51,19 @@
                 </td>
                 <td>{{ post.data.category.category }}</td>
                 <td>{{ post.data.createdAt.toMillis() | date }}</td>
-                <td>
+                <td style="max-width: 200px; height: auto">
                   <button
                     class="btn btn-sm btn-warning"
                     routerLink="/posts/new"
                     [queryParams]="{ id: post.id }"
                   >
                     Edit
+                  </button>
+                  <button
+                    class="btn btn-sm btn-danger mt-2"
+                    (click)="onDelete(post.data.postImgPath, post.id)"
+                  >
+                    Delete
                   </button>
                 </td>
               </tr>

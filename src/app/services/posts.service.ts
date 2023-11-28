@@ -67,10 +67,24 @@ export class PostsService {
   }
 
   updateData(id: any, postData: any) {
+    this.afs
+      .doc(`posts/${id}`)
+      .update(postData)
+      .then(() => {
+        this.toastr.success('Post Data Update Successfully ..!');
+        this.router.navigate(['/posts']);
+      });
+  }
 
-    this.afs.doc(`posts/${id}`).update(postData).then(()=>{
-      this.toastr.success('Post Data Update Successfully ..!');
-      this.router.navigate(['/posts']);
+  deleteImage(postImgPath: any, id: any) {
+    this.storage.storage.refFromURL(postImgPath).delete().then(()=>{
+      this.deleteData(id);
+    })
+  }
+
+  deleteData(id:any){
+    this.afs.doc(`posts/${id}`).delete().then(()=>{
+      this.toastr.warning('Delete Successfully ..!');
     })
   }
 }
