@@ -16,42 +16,6 @@ export class PostsService {
     private router: Router
   ) {}
 
-  uploadImage(selectedImage: any, postData: any, formStatus: any, id: any) {
-    const filePath = `postIMG/${Date.now()}`;
-
-    this.storage.upload(filePath, selectedImage).then(() => {
-      console.log('Post image uploaded successfully.');
-
-      this.storage
-        .ref(filePath)
-        .getDownloadURL()
-        .subscribe((URL) => {
-          postData.postImgPath = URL;
-
-          if (formStatus == 'Edit') {
-            this.updateData(id, postData);
-          } else {
-            this.saveData(postData);
-          }
-        });
-    });
-  }
-
-  loadData() {
-    return this.afs
-      .collection('posts')
-      .snapshotChanges()
-      .pipe(
-        map((actions) => {
-          return actions.map((a) => {
-            const data = a.payload.doc.data();
-            const id = a.payload.doc.id;
-            return { id, data };
-          });
-        })
-      );
-  }
-
   loadOneData(id: any) {
     return this.afs.doc(`posts/${id}`).valueChanges();
   }
