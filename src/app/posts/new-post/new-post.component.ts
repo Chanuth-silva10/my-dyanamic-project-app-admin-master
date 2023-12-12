@@ -61,9 +61,9 @@ export class NewPostComponent implements OnInit {
         });
       } else {
         this.postForm = this.fb.group({
-          title: ['', [Validators.required, Validators.minLength(1)]],
+          title: ['', [Validators.required, Validators.minLength(10)]],
           permalink: ['', Validators.required],
-          excerpt: ['', [Validators.required, Validators.minLength(5)]],
+          excerpt: ['', [Validators.required, Validators.minLength(10)]],
           category: ['', Validators.required],
           postImg: ['', Validators.required],
           content: ['', Validators.required],
