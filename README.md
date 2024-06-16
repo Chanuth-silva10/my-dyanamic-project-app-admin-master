@@ -1,27 +1,35 @@
 # AppBlogDashboard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.10.
+## Overview
+AppBlogDashboard is an Angular-based application designed to serve as an admin dashboard for managing blog content, with Firebase as the backend. This project was generated using Angular.
 
-## Development server
+## Key Features
+- **Development Server**: Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
+- **Code Scaffolding**: Use `ng generate component component-name` to generate new components.
+- **Build**: Run `ng build` to build the project.
+- **Unit Testing**: Run `ng test` to execute unit tests via Karma.
+- **End-to-End Testing**: Run `ng e2e` to execute end-to-end tests.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Technologies Used
+- **Angular**: Front-end framework for building dynamic web applications.
+- **Firebase**: Backend-as-a-Service for database, authentication, and hosting.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Installation
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/Chanuth-silva10/my-dyanamic-project-app-admin-master.git
+    ```
+2. Navigate to the project directory:
+    ```sh
+    cd my-dyanamic-project-app-admin-master
+    ```
+3. Install dependencies:
+    ```sh
+    npm install
+    ```
+## Usage
+### Development Server
+Run the development server:
+```sh
+ng serve
+```
